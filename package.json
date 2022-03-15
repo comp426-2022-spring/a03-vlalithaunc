@@ -1,6 +1,6 @@
 {
   "name": "a03-vlalithaunc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build an API to flip some coins.",
   "main": "server.js",
   "scripts": {
