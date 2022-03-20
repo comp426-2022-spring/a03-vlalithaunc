@@ -42,13 +42,23 @@ function countFlips(array) {
       }
     }
     if(numHeads == 0){
-        return "{ tails: " + numTails.toString() + " }";
+        let summary_tails = {
+            tails: numTails
+        }
+        return summary_tails;
     }
     else if(numTails == 0){
-        return "{ heads: " + numHeads.toString() + " }";
+        let summary_heads = {
+            heads:numHeads
+        }
+        return summary_heads;
     }
     else{
-        return "{ tails: " + numTails.toString() + ", heads: " + numHeads.toString() + " }";
+        let summary = {
+            tails: numTails,
+            heads: numHeads
+        }
+        return summary;
     }
 }    
 
@@ -81,7 +91,7 @@ app.get('/app/flip/', (req, res) => {
     res.status(200).json({ "flip" : flip});
 })
 
-app.get('/app/flips/:number', (req, res) =>{
+app.get('/app/flips/:number([0-9]{1,3})', (req, res) =>{
     const flips_arr = coinFlips(req.params.number);
     const count_flips = countFlips(flips_arr);
     res.status(200).json({"raw": flips_arr, "summary": count_flips});
