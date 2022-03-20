@@ -7,8 +7,8 @@ const args = require('minimist')(process.argv.slice(2))
 args["port"]
 
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+// app.use(express.json())
+// app.use(express.urlencoded({extended: true}))
 
 const port = args.port || process.env.PORT || 5000;
 
@@ -53,16 +53,20 @@ function countFlips(array) {
 }    
 
 function flipACoin(call) {
-    var flip = coinFlip();
-    const results = ['win', 'lose'];
-    var result = "";
+    let flip = coinFlip();
+    let result;
     if(flip == call){
-      result = results[0];
+      result = 'win';
     }
     else{
-      result = results[1];
+      result = 'lose';
     }
-    return "{ call: " + call + ", flip: " + flip + ", result: " + result + " }";
+    let game_summary = {
+       call: call,
+       flip: flip,
+       result: result
+    }
+    return game_summary;
 }
 
 app.get('/app/', (req, res) => {
