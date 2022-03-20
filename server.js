@@ -65,8 +65,9 @@ function flipACoin(call) {
 }
 
 app.get('/app/', (req, res) => {
-    res.status(200).end('200 OK')
-    //res.type("text/plain")
+    const statusCode = 200;
+    const statusMessage = 'OK';
+    res.status(statusCode).end(statusCode + ' ' + statusMessage);
 })
 
 app.get('/app/flip/', (req, res) => {
