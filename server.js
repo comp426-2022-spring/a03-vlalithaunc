@@ -1,17 +1,21 @@
 //express is main dependency
-
 const express = require('express')
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+const args = require('minimist')(process.argv.slice(2))
 
-const logging = (req, res, next) => {
-    console.log(req.body.number)
-    next()
-}
+args["port"]
 
-var port = 5000
+
+// app.use(express.json())
+// app.use(express.urlencoded({extended: true}))
+
+const port = args.port || process.env.PORT || 5000
+
+// const logging = (req, res, next) => {
+//     console.log(req.body.number)
+//     next()
+// }
 
 const server = app.listen(port, () => {
     console.log('App is running on %PORT%'.replace('%PORT%', port))
@@ -71,7 +75,8 @@ app.get('/app/', (req, res) => {
 })
 
 app.get('/app/flip/', (req, res) => {
-    res.status(200).json({'flip': coinFlip()})
+    const flip = coinFlip();
+    res.status(200).json({ "flip" : flip});
 })
 
 
@@ -80,9 +85,9 @@ app.get('/app/flip/', (req, res) => {
 //})
 
 
-app.get('/app/echo/', logging,  (req, res) => {
-    res.status(200).json({'message': req.body.number})
-})
+// app.get('/app/echo/', logging,  (req, res) => {
+//     res.status(200).json({'message': req.body.number})
+// })
 
 
 
